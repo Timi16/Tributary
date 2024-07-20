@@ -16,5 +16,10 @@ def collect():
     if not temperatures:
         return jsonify({'error': 'No data available'}), 404
     temperatures = [float(temp) for temp in temperatures]
-    average_temp = sum(temperatures) / len(temperatures)
-    return jsonify({'average_temperature': average_temp}), 200
+    current_engine_temperature = temperatures[0]
+    average_engine_temperature = sum(temperatures) / len(temperatures)
+    result = {
+        'current_engine_temperature': current_engine_temperature,
+        'average_engine_temperature': average_engine_temperature
+    }
+    return jsonify(result), 200
